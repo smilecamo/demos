@@ -10,11 +10,12 @@ module.exports = {
   // 项目路径
   baseUrl: BASE_URL,
   // 颗粒化配置webpack
-  chainWepack: config => {
+  chainWebpack: config => {
     // 配置别名
     config.resolve.alias
       .set('@', resolve('src'))
       .set('_c', resolve('src/components'))
+      .set('_v', resolve('src/views'))
   },
   // 打包时不生成map文件
   productionSourceMap: false

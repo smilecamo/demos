@@ -2,9 +2,16 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/argu/argu1">argu1</router-link> |
+      <router-link to="/argu/argu2">argu2</router-link> |
+      <router-link to="/parent">parent</router-link> |
+      <router-link to="/parent/children">children</router-link> |
+      <router-link to="/name">命名路由</router-link> |
     </div>
     <router-view/>
+    <router-view name='tel'></router-view>
+    <router-view name='email'></router-view>
   </div>
 </template>
 <style lang="stylus">
