@@ -1,18 +1,17 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import state from './state'
-import mutations from './mutations'
-import actions from './actions'
-// 引入模块类
-import user from './module/user'
-Vue.use(Vuex)
+import Vue from 'vue';
+import Vuex from 'vuex';
+import state from './state';
+import mutations from './mutations';
+import actions from './actions';
+import getters from './getters';
 
-export default new Vuex.Store({
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
   state,
   mutations,
   actions,
-  // 使用模块
-  modules: {
-    user
-  }
-})
+  getters,
+});
+
+export default store;

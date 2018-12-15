@@ -1,26 +1,41 @@
-// webpack 配置项
-const path = require('path')
-// 定义一个绝对路径方法
-const resolve = dir => path.join(__dirname, dir)
-// 区分开发与生产使用不同路径
-const BASE_URL = process.env.NODE_ENV === 'procution' ? '/admin/' : '/'
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 module.exports = {
-  // eslint 保存时是否检查
+  /**
+   * es-lint配置
+   * 通过 eslint-loader 在每次保存时执行校验的选项是默认开启的，
+   * 你也可以通过 vue.config.js 中的 lintOnSave 选项将其关闭。
+   */
   lintOnSave: false,
-  // 项目路径
-  baseUrl: BASE_URL,
-  // 颗粒化配置webpack
-  chainWebpack: config => {
-    // 配置别名
+  /**
+   * 别名配置
+   */
+  chainWebpack: (config) => {
     config.resolve.alias
       .set('@', resolve('src'))
-      .set('_c', resolve('src/components'))
-      .set('_v', resolve('src/views'))
+      .set('_a', resolve('src/api'))
+      .set('assets', resolve('src/assets'))
+      .set('_v', resolve('src/view'))
+      .set('layout', resolve('src/layout'))
+      .set('base', resolve('src/base'))
+      .set('static', resolve('src/static'));
   },
-  // 打包时不生成map文件
-  productionSourceMap: false
-  // 跨域
-  // devServer: {
-  //   proxy: 'http://localhost:4000'
-  // }
-}
+  /**
+   * baseUrl配置
+   */
+  baseUrl: process.env.NODE_ENV === 'production'
+    ? '/production-sub-path/'
+    : '/',
+  /**
+   * 代理
+   * 如果你的前端应用和后端 API 服务器没有运行在同一个主机上，
+   * 你需要在开发环境下将 API 请求代理到 API 服务器。
+   * 这个问题可以通过 vue.config.js 中的 devServer.proxy选项来配置
+   */
+  devServer: {
+    proxy: 'http://localhost:4000',
+  },
+};
